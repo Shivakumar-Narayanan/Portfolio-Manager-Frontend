@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Finance</title>
+    <!-- Link your custom CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 ">
+    <div class="ml-10 mt-10 max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Your Portfolios</h6>
+        <p class="mb-3 font-normal text-sm text-gray-700 dark:text-gray-400">Only you can see this</p>
+        <h4 class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">₹ 7.93L</h4>
+        <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <tbody>
+                    <tr class="bg-white dark:bg-gray-800">
+                            <td class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">  
+                            Diversified Growth 
+                            </td>
+                            <td class="px-2 py-3">
+                            ₹ 3.41L   
+                            </td>
+                            <td class="px-2 my-2 py-1 flex justify-center items-center bg-gray-100 rounded-2xl">
+                                10.74%
+                            </td>
+                    </tr>
+                    <tr class="bg-white dark:bg-gray-800">
+                        <td class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Global Opportunities
+                        </td>
+                        <td class="px-2 py-3">
+                            ₹ 4.52L
+                        </td>
+                        <td class="px-2 my-2 py-1 flex justify-center items-center bg-gray-100 rounded-2xl">
+                            -8.24%
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
+            <div class="flex justify-center">
+                <button id="create-portfolio-model-button" data-modal-target="create-portfolio-model" data-modal-toggle="create-portfolio-model" type="button" class="block mt-2 py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+ Create Portfolio</button>
+            </div>
+        </div>
+  
+  <!-- Create portfolio modal -->
+  <div id="create-portfolio-model" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button id="close-create-portfolio-model" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="create-portfolio-model">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-semibold dark:text-white">Create a new portfolio</h3>
+                  <form class="space-y-6" action="#">
+                      <div>
+                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portfolio name</label>
+                          <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Short Term Portfolio" required>
+                      </div>
+                      <button data-modal-hide="create-portfolio-model" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Cancel
+                    </button>
+                    <button data-modal-hide="create-portfolio-model" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div> 
+
+<script type="module" src="main.js"></script> 
+</body>
+</html>
+
+
