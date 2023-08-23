@@ -6,76 +6,209 @@
     <title>Simple Finance</title>
     <!-- Link your custom CSS file -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="#">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-<body class="bg-gray-100 ">
-    <div class="ml-10 mt-10 max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Your Portfolios</h6>
-        <p class="mb-3 font-normal text-sm text-gray-700 dark:text-gray-400">Only you can see this</p>
-        <h4 class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">₹ 7.93L</h4>
-        <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
-        <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <tbody>
-                    <tr class="bg-white dark:bg-gray-800">
-                            <td class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">  
-                            Diversified Growth 
-                            </td>
-                            <td class="px-2 py-3">
-                            ₹ 3.41L   
-                            </td>
-                            <td class="px-2 my-2 py-1 flex justify-center items-center bg-gray-100 rounded-2xl">
-                                10.74%
-                            </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800">
-                        <td class="px-2 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Global Opportunities
-                        </td>
-                        <td class="px-2 py-3">
-                            ₹ 4.52L
-                        </td>
-                        <td class="px-2 my-2 py-1 flex justify-center items-center bg-gray-100 rounded-2xl">
-                            -8.24%
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
-            <div class="flex justify-center">
-                <button id="create-portfolio-model-button" data-modal-target="create-portfolio-model" data-modal-toggle="create-portfolio-model" type="button" class="block mt-2 py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+ Create Portfolio</button>
+<body class="bg-gray-100">
+    <!DOCTYPE html>
+<html lang="en">
+   <head>
+          
+      <meta charset="UTF-8">
+          
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          
+      <title>Simple Finance</title>
+          <!-- Link your custom CSS file -->    
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body class="bg-gray-100 ">
+          
+    <div class="flex">
+        <div class="w-4/5 ml-10 mr-10 mt-10 shrink-0 overflow-x-auto justify-center shadow-md sm:rounded-lg">
+            <form>
+                <div class="flex">
+                    <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Combined Search</label>
+                    <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg></button>
+                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                        <li>
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</button>
+                        </li>
+                        <li>
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Stock</button>
+                        </li>
+                        <li>
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mutual Fund</button>
+                        </li>
+                        <li>
+                            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Currency</button>
+                        </li>
+                        </ul>
+                    </div>
+                    <div class="relative w-full">
+                        <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Stocks, Mutual Funds, Currencies..." required>
+                        <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+    
+    <div class="flex">
+        <!-- Left Column (4/14 width) - Portfolio Display Component -->
+        <div class="w-4/14 flex flex-col">
+            <div class="ml-10 mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <!-- Portfolio Title -->
+                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Diwik's Portfolio</h6>    
+                <!-- Total Value and Percentage Change -->
+                    <div class="flex flex-row n mt-1">
+                        <p class="text-lg font-semibold text-green-500 dark:text-green-400 pr-3">$100,000</p>
+                        <p class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> +15.1%</p>
+                    </div>
+                    <!-- Horizontal Line -->
+                    <hr class="h-px mt-3 bg-gray-200 border-0 dark:bg-gray-700">
+    
+                <!-- Table -->
+                <table class="mt-4 w-full text-base text-gray-800 dark:text-gray-100">
+                    <thead>
+                        <tr>
+                            <th class="px-2 py-2 text-center text-gray-500">Symbol</th>
+                            <th class="px-10 py-2 text-left text-gray-500">Name</th>
+                            <th class="px-4 py-2 text-right text-gray-500">Price</th>
+                            <th class="px-4 py-2 text-left text-gray-500">Quantity</th>
+                            <th class="px-4 py-2 text-center text-gray-500">Day Gain</th>
+                            <th class="px-3 py-2 text-center text-gray-500">Change</th>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="border-b border-gray-300 dark:border-gray-700"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-2 py-1 text-center"><div class=" bg-blue-800 text-white dark:text-blue-200 font-semibold rounded-md mt-1 p-0.5">AAPL</div></td>
+                            <td class="px-10 py-1">Apple Inc.</td>
+                            <td class="px-4 py-1 text-right">$150.00</td>
+                            <td class="px-4 py-1">100</td>
+                            <td class="px-4 py-1 text-center text-green-500">+$5,000</td>
+                            <td class="px-3 py-1 text-center"><div class=" bg-green-200 text-green-500 dark:text-green-400 font-semibold rounded-md mt-1 p-0.5">20.1%</div></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2 py-1 text-center"><div class="bg-purple-800 text-white dark:text-purple-200 font-semibold rounded-md mt-1 p-0.5">GOOGL</div></td>
+                            <td class="px-10 py-1">Alphabet Inc.</td>
+                            <td class="px-4 py-1 text-right">$2,800.00</td>
+                            <td class="px-4 py-1">50</td>
+                            <td class="px-4 py-1 text-center text-red-500">-$2,000</td>
+                            <td class="px-3 py-1 text-center"><div class=" bg-red-200 text-red-500 dark:text-red-400 font-semibold rounded-md mt-1 p-0.5">-17.3%</div></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div role="status" class="max-w-2xl p-4 border border-gray-200  bg-white rounded shadow animate-pulse md:p-6 dark:border-gray-700 ml-10 mt-10">
+                <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
+                    <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                        <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
+                        <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                    </svg>
+                </div>
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                <div class="flex items-center mt-4 space-x-3">
+                   <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+                    </svg>
+                    <div>
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
+                        <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    </div>
+                </div>
+                <span class="sr-only">Loading...</span>
             </div>
         </div>
-  
-  <!-- Create portfolio modal -->
-  <div id="create-portfolio-model" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative w-full max-w-md max-h-full">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <button id="close-create-portfolio-model" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="create-portfolio-model">
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                  </svg>
-                  <span class="sr-only">Close modal</span>
-              </button>
-              <div class="px-6 py-6 lg:px-8">
-                  <h3 class="mb-4 text-xl font-semibold dark:text-white">Create a new portfolio</h3>
-                  <form class="space-y-6" action="#">
-                      <div>
-                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Portfolio name</label>
-                          <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Short Term Portfolio" required>
-                      </div>
-                      <button data-modal-hide="create-portfolio-model" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                        Cancel
-                    </button>
-                    <button data-modal-hide="create-portfolio-model" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div> 
+    
+        <!-- Middle Placeholder Column (6/14 width) -->
+        <div class="w-8/14">
+            <!-- Placeholder Content -->
+            <!-- You can add content here for the middle column -->
+            <div class="mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Inc.</h6>    
+                <div class="flex flex-row n mt-1">
+                    <p class="text-lg font-semibold text-green-500 dark:text-green-400 pr-3">$2,221</p>
+                    <p class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> +2.1%</p>
+                </div>
+                <div id="area-chart"></div>
+                <div role="status" class="max-w-2xl p-4 border border-gray-200  bg-white rounded shadow animate-pulse md:p-6 dark:border-gray-700 ml-10 mt-10">
+                    <div class="flex items-center justify-center h-10 mb-4 bg-gray-300 rounded dark:bg-gray-700">
+                    </div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                    <div class="flex items-center mt-4 space-x-3">
+                        <div>
+                            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
+                            <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                        </div>
+                    </div>
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>   
+        </div>
+    
+        <!-- Unused Column (2/14 width) -->
+        <div class="w-2/14">
+            <!-- Placeholder Content -->
+            <!-- You can add content here for the unused column -->
+            <div class="flex justify-end mt-10 mr-10">
+                <div class="bg-white rounded-lg shadow-md p-4 max-w-card">
+                    <!-- Tab Navigation -->
+                    <ul class="flex flex-wrap text-sm font-semibold text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                        <li class="mr-2">
+                            <a href="#" id="indiaTab" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">India</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="worldTab" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Rest of World</a>
+                        </li>
+                    </ul>
+            
+                    <!-- Tab Content with Fixed Height and Vertical Scroll -->
+                    <div class="mt-4 h-80 overflow-y-auto"> <!-- Set the fixed height and enable vertical scrolling -->
+                        <!-- Inject stock index cards here using JavaScript -->
+                        <div id="stockIndexContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+        <!-- Template for Profit Arrow -->
+    <template id="profit-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
+        </svg>
+    </template>
+    
+    <!-- Template for Loss Arrow -->
+    <template id="loss-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+        </svg>
+    </template>
+    
+    <script type="module" src="main.js"></script>
 
-<script type="module" src="main.js"></script> 
-</body>
+    </body>
 </html>
 
 
