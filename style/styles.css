@@ -79,3 +79,36 @@ body {
   .chart-container.light-mode {
     border: 1px solid #e9ecef;
   }
+
+  /* search bar css */
+
+  #searchText {
+    margin-right: 5px;
+}
+#searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+  .flexible-iframe {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* This sets the aspect ratio to 16:9 (change as needed) */
+    position: relative;
+}
+
+.flexible-iframe iframe {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border: 0;
+}
+.form-group {
+  display: flex; /* Use flex display to align items horizontally */
+  align-items: center; 
+}
+.form-group h3{
+  display: flex; /* Use flex display to align items horizontally */
+  align-items: center; 
+  color: #3498db;
+}

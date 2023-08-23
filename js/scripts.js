@@ -28,6 +28,7 @@ function populateStockTable() {
           <td>${stock.symbol}</td>
           <td>${stock.price}</td>
           <td>${stock.stockCount}</td>
+          <td><button class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
       `;
       stockTableBody.appendChild(row);
   });
@@ -57,7 +58,10 @@ toggleStocksButton.addEventListener("click", toggleStocks);
 
 // const loadStocksButton = document.getElementById("loadStocksButton");
 // loadStocksButton.addEventListener("click", populateStockTable);
-
+function removeRow(button) {
+  var row = button.parentNode.parentNode; // Get the row containing the button
+  row.parentNode.removeChild(row); // Remove the row
+}
 
 // end of fucntion to implement the view stock list fucntionality
 
@@ -115,3 +119,79 @@ toggleStocksButton.addEventListener("click", toggleStocks);
  });
 
 // ------------------portfolio chart end -------------------------
+
+// search bar js function
+let StockSelected = null;
+
+function selectStock(button) {
+    const row = button.parentNode.parentNode;
+    const symbol = row.cells[0].textContent;
+    StockSelected = symbol;
+    document.getElementById('searchInput').value = StockSelected;
+    console.log(`Selected stock: ${StockSelected}`);
+}
+
+const searchInput = document.getElementById('searchInput');
+const stockTable = document.getElementById('stockTable');
+const stockTableBodyForSearch = document.getElementById('stockTableBodyForSearch');
+const noStockMessage = document.getElementById('noStockMessage');
+
+const hardCodedData = [
+    { symbol: 'AAPL', price: '$150', count: 10 },
+    { symbol: 'GOOG', price: '$2800', count: 5 }
+    // Add more rows as needed
+];
+
+function populateTableWithData(data) {
+    data.forEach(stock => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${stock.symbol}</td>
+            <td>${stock.price}</td>
+            <td>${stock.count}</td>
+            <td><button class="btn btn-primary" onclick="selectStock(this)">Select</button></td>
+        `;
+        stockTableBodyForSearch.appendChild(row);
+    });
+}
+
+searchInput.addEventListener('input', function () {
+    const searchValue = searchInput.value.toLowerCase();
+
+    stockTableBodyForSearch.innerHTML = ''; // Clear previous rows
+
+    if (searchValue.length === 0) {
+        stockTable.style.display = 'none';
+        noStockMessage.style.display = 'none';
+    } else {
+        let foundStock = false;
+
+        hardCodedData.forEach(stock => {
+            const symbol = stock.symbol.toLowerCase();
+            if (symbol.includes(searchValue)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${stock.symbol}</td>
+                    <td>${stock.price}</td>
+                    <td>${stock.count}</td>
+                    <td><button class="btn btn-primary" onclick="selectStock(this)">Select</button></td>
+                `;
+                stockTableBodyForSearch.appendChild(row);
+                foundStock = true;
+            }
+        });
+
+        if (foundStock) {
+            stockTable.style.display = 'block';
+            noStockMessage.style.display = 'none';
+        } else {
+            stockTable.style.display = 'none';
+            noStockMessage.style.display = '';
+        }
+    }
+});
+
+// Populate the table using the hard-coded data when the page loads
+populateTableWithData(hardCodedData);
+
+// search bar funtion ends
