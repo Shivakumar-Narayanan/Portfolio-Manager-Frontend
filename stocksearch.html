@@ -1,0 +1,105 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Stock Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search Stock Symbol">
+        </div>
+        <table class="table table-striped" id="stockTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Stock Symbol</th>
+                    <th>Price</th>
+                    <th>Stock Count</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+                
+            </tbody>
+        </table>
+        <p id="noStockMessage" style="display: none;">No stock present.</p>
+    </div>
+    
+    <script>
+        let StockSelected = null;
+
+        function selectStock(button) {
+            const row = button.parentNode.parentNode;
+            const symbol = row.cells[0].textContent;
+            StockSelected = symbol;
+            document.getElementById('searchInput').value = StockSelected;
+            console.log(`Selected stock: ${StockSelected}`);
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        const stockTable = document.getElementById('stockTable');
+        const stockTableBody = document.getElementById('stockTableBody');
+        const noStockMessage = document.getElementById('noStockMessage');
+
+        const hardCodedData = [
+            { symbol: 'AAPL', price: '$150', count: 10 },
+            { symbol: 'GOOG', price: '$2800', count: 5 }
+            // Add more rows as needed
+        ];
+
+        function populateTableWithData(data) {
+            data.forEach(stock => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${stock.symbol}</td>
+                    <td>${stock.price}</td>
+                    <td>${stock.count}</td>
+                    <td><button class="btn btn-primary" onclick="selectStock(this)">Select</button></td>
+                `;
+                stockTableBody.appendChild(row);
+            });
+        }
+
+        searchInput.addEventListener('input', function () {
+            const searchValue = searchInput.value.toLowerCase();
+
+            stockTableBody.innerHTML = ''; // Clear previous rows
+
+            if (searchValue.length === 0) {
+                stockTable.style.display = 'none';
+                noStockMessage.style.display = 'none';
+            } else {
+                let foundStock = false;
+
+                hardCodedData.forEach(stock => {
+                    const symbol = stock.symbol.toLowerCase();
+                    if (symbol.includes(searchValue)) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${stock.symbol}</td>
+                            <td>${stock.price}</td>
+                            <td>${stock.count}</td>
+                            <td><button class="btn btn-primary" onclick="selectStock(this)">Select</button></td>
+                        `;
+                        stockTableBody.appendChild(row);
+                        foundStock = true;
+                    }
+                });
+
+                if (foundStock) {
+                    stockTable.style.display = 'block';
+                    noStockMessage.style.display = 'none';
+                } else {
+                    stockTable.style.display = 'none';
+                    noStockMessage.style.display = '';
+                }
+            }
+        });
+
+        // Populate the table using the hard-coded data when the page loads
+        populateTableWithData(hardCodedData);
+    </script>
+</body>
+</html> -->
