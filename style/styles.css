@@ -4,7 +4,10 @@ body {
     padding: 0;
     font-family: 'Times New Roman', Times, serif;
   }
-
+.box {
+  display: grid;
+  padding: 200px;
+}
 /* Basic styling for the ticker container */
 .ticker-container {
     overflow: hidden;
@@ -52,3 +55,27 @@ body {
     max-height: 100px; /* Adjust this value as needed */
   }
   
+  /* portfolio chart graph */
+
+   /* Additional custom styling */
+   .chart-container {
+    position: relative;
+    height: 400px; /* Adjust the height as desired */
+    max-width: 700px; /* Adjust the max-width as desired */
+    margin: 0 auto;
+  }
+  body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .card.light-mode {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+  }
+  .card-header.light-mode {
+    background-color: #e9ecef;
+    border-color: #e9ecef;
+  }
+  .chart-container.light-mode {
+    border: 1px solid #e9ecef;
+  }

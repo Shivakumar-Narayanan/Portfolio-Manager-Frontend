@@ -57,3 +57,61 @@ toggleStocksButton.addEventListener("click", toggleStocks);
 
 // const loadStocksButton = document.getElementById("loadStocksButton");
 // loadStocksButton.addEventListener("click", populateStockTable);
+
+
+// end of fucntion to implement the view stock list fucntionality
+
+// ------------ portfolio chart------------------------------
+
+ // Sample data
+ var timeLabels = ["Jan", "Feb", "Mar", "Apr", "May"];
+ var portfolioWorth = [2500, 3500, 1100, 5750, 8500];
+
+ // Get the canvas element
+ var ctx = document.getElementById('portfolioChart').getContext('2d');
+
+ // Create the chart
+ var portfolioChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+     labels: timeLabels,
+     datasets: [{
+       label: 'Portfolio Worth',
+       data: portfolioWorth,
+       backgroundColor: 'rgba(75, 192, 192, 0.2)',
+       borderColor: 'rgba(75, 192, 192, 1)',
+       borderWidth: 2,
+       pointRadius: 4,
+       pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+       pointBorderColor: 'white',
+       pointBorderWidth: 2
+     }]
+   },
+   options: {
+     responsive: true,
+     maintainAspectRatio: false,
+     scales: {
+       y: {
+         beginAtZero: true,
+         title: {
+           display: true,
+           text: 'Portfolio Worth'
+         }
+       },
+       x: {
+         title: {
+           display: true,
+           text: 'Time'
+         }
+       }
+     },
+     plugins: {
+       legend: {
+         display: true,
+         position: 'top'
+       }
+     }
+   }
+ });
+
+// ------------------portfolio chart end -------------------------
