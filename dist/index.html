@@ -10,8 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-<body class="bg-gray-100">
-   <body class="bg-gray-100 ">
+<body class="bg-gray-100 overflow-y-auto h-full">
     <div class="fixed top-0 h-28 -z-20 min-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     </div>
     <div class="flex">
@@ -89,10 +88,10 @@
     
     <div class="fixed top-20 -z-10 flex">
         <!-- Left Column (4/14 width) - Portfolio Display Component -->
-        <div class="w-4/14 flex flex-col">
-            <div class="ml-0 mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-4/14 flex flex-col">            
+            <div class="ml-0 mt-10 mr-0.5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <!-- Portfolio Title -->
-                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Diwik's Portfolio</h6>    
+                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portfolio Overview</h6>    
                 <!-- Total Value and Percentage Change -->
                 <div class="flex flex-row n mt-1">
                     <p id="portfolio-total-value" class="text-lg font-semibold pr-3"></p>
@@ -101,50 +100,139 @@
                 <!-- Horizontal Line -->
                 <hr class="h-px w-full mt-3 bg-gray-200 border-0 dark:bg-gray-700">
             
+                <!-- Table with fixed height -->
+                <div class="table-height overflow-y-auto">
+                    <table id="portfolio-table" class="w-full text-base text-gray-800 dark:text-gray-100">
+                        <thead class="sticky top-0 bg-white dark:bg-gray-800">
+                            <tr>
+                                <th class="px-2 py-2 text-center text-gray-500">SYMBL</th>
+                                <th class="px-10 py-2 text-left text-gray-500">NAME</th>
+                                <th class="px-4 py-2 text-right text-gray-500">ABP</th>
+                                <th class="px-4 py-2 text-right text-gray-500">CPS</th>
+                                <th class="px-4 py-2 text-left text-gray-500">QTY</th>
+                                <th class="px-4 py-2 text-right text-gray-500">TI</th>
+                                <th class="px-4 py-2 text-center text-gray-500">P/L</th>
+                                <th class="px-3 py-2 text-center text-gray-500">P/L %</th>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="border-b border-gray-300 dark:border-gray-700"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be generated dynamically here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            <!-- Transaction Table -->
+            <div class="mt-2 mr-0.5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <!-- Portfolio Title -->
+                <h6 id="portfolioTitle" class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Transaction History</h6>    
+                    <!-- Horizontal Line -->
+                    <hr class="h-px mt-3 w-full  bg-gray-200 border-0 dark:bg-gray-700">
+    
                 <!-- Table -->
-                <table id="portfolio-table" class="mt-4 w-full text-base text-gray-800 dark:text-gray-100">
-                    <thead>
-                        <tr>
+                <div class="table-height overflow-y-auto"> 
+                <table id="transaction-table" class="mt-3 w-full text-base text-gray-800 dark:text-gray-100">
+                    <thead class="sticky top-0 bg-white dark:bg-gray-800">
+                        <tr>    
                             <th class="px-2 py-2 text-center text-gray-500">SYMBL</th>
                             <th class="px-10 py-2 text-left text-gray-500">NAME</th>
-                            <th class="px-4 py-2 text-right text-gray-500">ABP</th>
-                            <th class="px-4 py-2 text-right text-gray-500">CPS</th>
+                            <th class="px-4 py-2 text-right text-gray-500">PRICE</th>
                             <th class="px-4 py-2 text-left text-gray-500">QTY</th>
                             <th class="px-4 py-2 text-right text-gray-500">TI</th>
-                            <th class="px-4 py-2 text-center text-gray-500">P/L</th>
-                            <th class="px-3 py-2 text-center text-gray-500">P/L %</th>
+                            <th class="px-4 py-2 text-center text-gray-500">TYPE</th>
+                            <th class="px-4 py-2 text-center text-gray-500">DATE</th>
+                            <th class="px-3 py-2 text-center text-gray-500">ACTN</th>
                         </tr>
                         <tr>
-                            <td colspan="7" class="border-b border-gray-300 dark:border-gray-700"></td>
+                            <td colspan="8" class="border-b border-gray-300 dark:border-gray-700"></td>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Table rows will be generated dynamically here -->
                     </tbody>
                 </table>
+            </div> 
+            </div>
+        </div>
+    
+        <!-- Middle Placeholder Column (6/14 width) -->
+        <div class="w-8/14 ml-2 ">
+            <!-- Placeholder Content -->
+            <!-- You can add content here for the middle column -->
+            <div class="mt-10 ml-0 mr-0 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                
+                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portfolio Statistics</h6> 
+                <hr class="h-px mt-3 w-full  bg-gray-200 border-0 dark:bg-gray-700 mb-1">   
+                <div class="flex flex-row n mt-1">
+                    <p class="text-4xl font-semibold">$32,221</p>
+                    <div class="flex flex-row rounded-md bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 mt-2 w-fit h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class=" mt-1.5 w-5 h-5">
+                            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="text-lg font-semibold "> 2.1%</p>
+                    </div>
+                </div>
+                <p id="live-portfolio-time"class="text-base text-gray-500 mt-1">Enter Time Here</p>                             
+
+                <div class="text-base font-semibold text-center text-gray-500 dark:text-gray-400 dark:border-gray-700">
+                    <ul class="flex flex-wrap -mb-px">
+                        <li class="mr-2">
+                            <a href="#" id="tab1D" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">1D</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="tab5D" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">5D</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="tab15D" class="tab-link inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">15D</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="tab1M" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">1M</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="tab6M" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">6M</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="tab1Y" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">1Y</a>
+                        </li>
+                    </ul>
+                </div>   
+                <div id="area-chart"></div>
+            </div>   
+
+            <div id="cardContainer" class=" ml-0 flex flex-wrap -mx-4 h-36 w-full overflow-x-auto bg-white shadow-md rounded-lg mt-2">
+                <!-- Cards will be generated dynamically here -->
             </div>
             
         </div>
     
-        <!-- Middle Placeholder Column (6/14 width) -->
-        <div class="w-8/14">
-            <!-- Placeholder Content -->
-            <!-- You can add content here for the middle column -->
-            <div class="mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Inc.</h6>    
-                <div class="flex flex-row n mt-1">
-                    <p class="text-lg font-semibold text-green-500 dark:text-green-400 pr-3">$2,221</p>
-                    <p class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> +2.1%</p>
-                </div>
-                <div id="area-chart"></div>
-            </div>   
-        </div>
-    
         <!-- Unused Column (2/14 width) -->
-        <div class="w-2/14">
+        <div class="w-2/14 ml-2">
             <!-- Placeholder Content -->
             <!-- You can add content here for the unused column -->
-            <div class="flex justify-end mt-10 mr-10">
+            <div class="flex justify-end mt-10 -left-1">
+                <div class="bg-white rounded-lg shadow-md p-4 max-w-card">
+                    <!-- Tab Navigation -->
+                    <ul class="flex flex-wrap text-sm font-semibold text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                        <li class="mr-2">
+                            <a href="#" id="gainersTab" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">Gainers</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#" id="losersTab" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Losers</a>
+                        </li>
+                    </ul>
+            
+                    <!-- Tab Content with Fixed Height and Vertical Scroll -->
+                    <div class="mt-4 h-72 w-full overflow-y-auto"> <!-- Set the fixed height and enable vertical scrolling -->
+                        <!-- Inject stock index cards here using JavaScript -->
+                        <div id="gainersLosersContainer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end mt-2 mr-0">
                 <div class="bg-white rounded-lg shadow-md p-4 max-w-card">
                     <!-- Tab Navigation -->
                     <ul class="flex flex-wrap text-sm font-semibold text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
@@ -157,7 +245,7 @@
                     </ul>
             
                     <!-- Tab Content with Fixed Height and Vertical Scroll -->
-                    <div class="mt-4 h-80 overflow-y-auto"> <!-- Set the fixed height and enable vertical scrolling -->
+                    <div class="mt-4 h-72 overflow-y-auto"> <!-- Set the fixed height and enable vertical scrolling -->
                         <!-- Inject stock index cards here using JavaScript -->
                         <div id="stockIndexContainer"></div>
                     </div>
@@ -252,6 +340,18 @@
         </svg>
     </template>
     
+    <template id="suggestion-profit-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-4 h-4">
+            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
+        </svg>
+    </template>
+    
+    <template id="suggestion-loss-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="w-4 h-4">
+            <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+        </svg>
+    </template>
+
     <script type="module" src="main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     </body>
