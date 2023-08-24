@@ -1,5 +1,7 @@
 import { addSearchBarEventListener } from "./shiva_js/searchBarEventListener.js";
 import { setupDataRefresh, setupRefresh10Seconds } from "./shiva_js/setupDataRefresh.js";
+import { displayTopGainers, displayTopLosers, createRowForGainer, createRowForLoser, createTableBodyForGainer, createTableBodyForLoser} from "./rahul/topLoserGainer.js"
+// import { populateTransactionTable, createTableBodyForTransaction, createRowForTransaction } from "./rahul/transaction.js";
 
 // startup
 const addEventListeners = () => {
@@ -10,6 +12,7 @@ addEventListeners();
 
 setupDataRefresh();
 setupRefresh10Seconds();
+// populateTransactionTable()
 
 // Example data fetched from your Spring Boot REST API
 const stockIndexesIndia = [
@@ -95,54 +98,49 @@ function createStockIndexCard(indexData) {
 
 // Function to display India-specific cards
 function displayIndiaStockIndexes() {
-    const cardContainer = document.getElementById('stockIndexContainer');
-    cardContainer.innerHTML = ''; // Clear existing cards
+    // const cardContainer = document.getElementById('stockIndexContainer');
+    // cardContainer.innerHTML = ''; // Clear existing cards
 
     // Loop through India-specific stock index data and create cards
-    stockIndexesIndia.forEach((indexData) => {
-        createStockIndexCard(indexData);
-    });
+    displayTopGainers()
 
     // Toggle tab styles
-    const indiaTab = document.getElementById('indiaTab');
-    const worldTab = document.getElementById('worldTab');
-    indiaTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    indiaTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
-    worldTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    worldTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+    const topGainers = document.getElementById('topGainers');
+    const topLosers = document.getElementById('topLosers');
+    topGainers.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+    topGainers.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+    topLosers.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+    topLosers.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
 }
 
 // Function to display Rest of World-specific cards
 function displayWorldStockIndexes() {
-    const cardContainer = document.getElementById('stockIndexContainer');
-    cardContainer.innerHTML = ''; // Clear existing cards
+    // const cardContainer = document.getElementById('stockIndexContainer');
+    // cardContainer.innerHTML = ''; // Clear existing cards
 
     // Loop through Rest of World-specific stock index data and create cards
-    stockIndexesWorld.forEach((indexData) => {
-        createStockIndexCard(indexData);
-    });
+    displayTopLosers();
 
     // Toggle tab styles
-    const indiaTab = document.getElementById('indiaTab');
-    const worldTab = document.getElementById('worldTab');
-    worldTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    worldTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
-    indiaTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    indiaTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+    const topGainers = document.getElementById('topGainers');
+    const topLosers = document.getElementById('topLosers');
+    topLosers.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+    topLosers.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+    topGainers.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+    topGainers.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
 }
 
 // Event listeners for tab buttons
-const indiaTab = document.getElementById('indiaTab');
-const worldTab = document.getElementById('worldTab');
+const topGainers = document.getElementById('topGainers');
+const topLosers = document.getElementById('topLosers');
 
-indiaTab.addEventListener('click', () => {
-    displayIndiaStockIndexes();
+topGainers.addEventListener('click', () => {
+    displayTopGainers();
 });
 
-worldTab.addEventListener('click', () => {
-    displayWorldStockIndexes();
+topLosers.addEventListener('click', () => {
+    displayTopLosers();
 });
 
 // Initially, display India-specific cards by default
 displayIndiaStockIndexes();
-

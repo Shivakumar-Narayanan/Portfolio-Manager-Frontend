@@ -1818,6 +1818,11 @@ input:checked + .toggle-bg {
   padding: 1.5rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1841,6 +1846,11 @@ input:checked + .toggle-bg {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .py-1 {
@@ -2054,6 +2064,26 @@ input:checked + .toggle-bg {
 .card-width {
   width: 12rem;
   /* Set your desired fixed width here */
+}
+
+#delete {
+  display: inline-block;
+  padding: 5px 5px;
+  background-color: #fd6a6a;
+  color: rgb(248, 250, 233);
+  border: none;
+  border-radius: 5px;
+  /* Adjust this value for the desired corner roundness */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Additional styles for hover effect */
+
+#delete:hover {
+  background-color: #f80606;
 }
 
 .hover\:border-gray-300:hover {
@@ -2316,3 +2346,6 @@ input:checked + .toggle-bg {
     padding: 1.5rem;
   }
 }
+
+  
+  

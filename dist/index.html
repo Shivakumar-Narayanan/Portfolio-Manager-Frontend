@@ -23,7 +23,8 @@
           <!-- Link your custom CSS file -->    
       <link rel="stylesheet" href="styles.css">
    </head>
-   <body class="bg-gray-100 " onload="populateTransactionTable()">
+   <!-- <body class="bg-gray-100 " onload="displayTopGainers()"> -->
+    <body class="bg-gray-100 " onload="populateTransactionTable()">
           
     <div class="flex">
         <div class="w-4/5 ml-10 mr-10 mt-10 shrink-0 overflow-x-auto justify-center shadow-md sm:rounded-lg">
@@ -156,16 +157,17 @@
                     <!-- Table -->
                     <table class="mt-4 w-full text-base text-gray-800 dark:text-gray-100">
                         <thead id="transactionTableHeader">
-                            <tr>
-                                <th class="px-2 py-2 text-center text-gray-500">Symbol</th>
-                                <th class="px-10 py-2 text-left text-gray-500">Name</th>
-                                <th class="px-4 py-2 text-right text-gray-500">Price</th>
-                                <th class="px-4 py-2 text-left text-gray-500">Quantity</th>
+                            <tr>    
+                                <th class="px-1 py-2 text-left text-gray-500">Symbol</th>
+                                <th class="px-6 py-2 text-center text-gray-500">Name</th>
+                                <th class="px-3 py-2 text-right text-gray-500">Price</th>
+                                <th class="px-3 py-2 text-left text-gray-500">Quantity</th>
                                 <th class="px-4 py-2 text-center text-gray-500">Type</th>
-                                <th class="px-3 py-2 text-center text-gray-500">Date</th>
+                                <th class="px-5 py-2 text-center text-gray-500">Date</th>
+                                <th class="px-3 py-2 text-center text-gray-500">Action</th>
                             </tr>
                             <tr>
-                                <td colspan="6" class="border-b border-gray-300 dark:border-gray-700"></td>
+                                <td colspan="7" class="border-b border-gray-300 dark:border-gray-700"></td>
                             </tr>
                         </thead>
                         <tbody id="transactionTableBody">
@@ -228,17 +230,20 @@
                     <!-- Tab Navigation -->
                     <ul class="flex flex-wrap text-sm font-semibold text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                         <li class="mr-2">
-                            <a href="#" id="indiaTab" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">India</a>
+                            <a href="#" id="topGainers" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">Top Gainers</a>
                         </li>
                         <li class="mr-2">
-                            <a href="#" id="worldTab" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Rest of World</a>
+                            <a href="#" id="topLosers" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Top Losers</a>
                         </li>
                     </ul>
             
                     <!-- Tab Content with Fixed Height and Vertical Scroll -->
                     <div class="mt-4 h-80 overflow-y-auto"> <!-- Set the fixed height and enable vertical scrolling -->
                         <!-- Inject stock index cards here using JavaScript -->
-                        <div id="stockIndexContainer"></div>
+                                            <!-- Table -->
+                    <table class="mt-4 w-full text-base text-gray-800 dark:text-gray-100" id="gain/loseTableBody">
+                        
+                    </table>
                     </div>
                 </div>
             </div>
@@ -262,6 +267,7 @@
     
     <script type="module" src="main.js"></script>
     <script src="../src/rahul/transaction.js"></script>
+    <!-- <script src="../src/rahul/topLoserGainer.js"></script> -->
 
     <!-- datalist for search dropdown -->
     <datalist id='search-datalist'>

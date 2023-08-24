@@ -5,3 +5,24 @@
 .card-width {
     width: 12rem; /* Set your desired fixed width here */
 }
+
+#delete {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #fd6a6a;
+    color: rgb(248, 250, 233);
+    border: none;
+    border-radius: 5px; /* Adjust this value for the desired corner roundness */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  /* Additional styles for hover effect */
+  #delete:hover {
+    background-color: #f80606;
+  }
+
+  
+  
