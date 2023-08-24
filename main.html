@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="populateTransactionTable()">
 
   <div class="ticker-container">
     <div class="ticker-content">
@@ -28,7 +28,7 @@
   </div>
 
 
-  <div class="container mt-2">
+  <div class="container-fluid p-5 mt-2">
     <div class="row">
       <div class="col">
         <h3>Market Summay</h3>
@@ -159,9 +159,30 @@
                   <!-- Stock data will be inserted here -->
               </tbody>
           </table>
+
       </div>
   
       </div>
+    </div>
+  </div>
+
+  <!-- Transaction Table -->
+  <div class="container">
+    <div class="row">
+      <table class="table table-hover table-striped">
+        <thead id="transactionTableHeader">
+            <tr>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Stock Symbol</th>
+                <th scope="col">Count</th>
+                <th scope="col">Price</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTableBody">
+            <!-- Transactions data will be inserted here -->
+        </tbody>
+    </table>
     </div>
   </div>
 
@@ -176,6 +197,7 @@
 
   <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="js\scripts.js"></script>
+  <script src="js/transaction.js"></script>
 </body>
 
 </html>

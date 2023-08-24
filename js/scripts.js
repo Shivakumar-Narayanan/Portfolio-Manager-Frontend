@@ -51,9 +51,80 @@ function toggleStocks() {
   }
 }
 
+// Function to populate the table with Transaction data
+function populateTransactionTable() {
+  
+  let url = "http://localhost:8083/transaction/getAllTransactions";
+    fetch(url)
+    .then(
+        (response) => {
+            if(response.ok) {
+                return response.json()
+            }
+            else{
+                throw new Error("No Transaction Found" + response.status)
+            }
+        }
+        )
+        .then(
+            (data) => createTableBodyForTransaction(data)
+        )
+        .catch(
+            (error) => 
+            { 
+                let html = `<td colspan='9'> ${error.message}`;
+                document.getElementById("transactionTableBody").innerHTML = html;
+        }
+        )
+}
+
+function createTableBodyForTransaction(data){
+  html ="";
+  for(let i=0;i<data.length;i++){
+    html += createRowForTransaction(data[i]);
+  }
+  document.getElementById("transactionTableBody").innerHTML = html;
+}
+
+function createRowForTransaction(json){
+  const html =`
+    <tr>
+      <td>${json.transactionDate}<td>
+      <td>${json.stock.ticker}<td>
+      <td>${json.stockCount}<td>
+      <td>${json.stockPrice}<td>
+      <td>${json.transactionType}<td>
+    </tr>
+  `
+  return html;
+
+}
+
+
+function toggleTransaction() {
+  const stockTable = document.getElementById("transactionTableBody");
+  const toggleButton = document.getElementById("toggleTransactionButton");
+  const tableHeader = document.getElementById("transactionTableHeader");
+
+  if (stockTable.style.display === "none") {
+      populateTransactionTable();
+      stockTable.style.display = "table-row-group";
+      toggleButton.innerText = "Transactions";
+      tableHeader.style.display = "table-header-group";
+  } else {
+      stockTable.style.display = "none";
+      toggleButton.innerText = "Transactions";
+      tableHeader.style.display = "none";
+  }
+}
+
 // Attach click event to the "Toggle Stocks" button
 const toggleStocksButton = document.getElementById("toggleStocksButton");
 toggleStocksButton.addEventListener("click", toggleStocks);
+
+const toggleTransactionButton = document.getElementById("toggleTransactionButton");
+toggleTransactionButton.addEventListener("click", toggleTransaction);
+
 
 // const loadStocksButton = document.getElementById("loadStocksButton");
 // loadStocksButton.addEventListener("click", populateStockTable);
