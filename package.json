@@ -1,5 +1,20 @@
 {
-  "dependencies": {
-    "datatables.net-dt": "^1.13.6"
+  "name": "portfolio-manager-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/styles.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "apexcharts": "^3.41.1",
+    "flowbite": "^1.8.1",
+    "tailwindcss": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }
