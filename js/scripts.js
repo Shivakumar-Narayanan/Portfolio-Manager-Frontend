@@ -18,20 +18,45 @@ const stocks = [
 
 // Function to populate the table with stock data
 function populateStockTable() {
+  const url = "http://localhost:8083/portfolio/currentPortfolio";
+   
+      fetch(url)
+      .then(
+          (response) => {
+              if(response.ok) {
+                  return response.json()
+              }
+              else{
+                  throw new Error("No Stocks Found" + response.status)
+              }
+          }
+          )
+          .then(
+              (stocks) => createTableBodyForStocks(stocks)
+          )
+          .catch(
+              (error) => 
+              { 
+                  let html = `<td colspan='9'> ${error.message}`;
+                  document.getElementById("stockTableBody").innerHTML = html;
+          }
+          )
+        }
+function createTableBodyForStocks(stocks){
   const stockTableBody = document.getElementById("stockTableBody");
-  stockTableBody.innerHTML = ""; 
-
-  stocks.forEach(stock => {
+  for(let i=0;i<stocks.portfolio.value.length;i++){
 
       const row = document.createElement("tr");
       row.innerHTML = `
-          <td>${stock.symbol}</td>
-          <td>${stock.price}</td>
-          <td>${stock.stockCount}</td>
+          <td>${stocks.portfolio.value[i].stock.ticker}</td>
+          <td>${stocks.portfolio.value[i].stock.name}</td>
+          <td>${stocks.portfolio.value[i].totalBuyAmount}</td>
+          <td>${stocks.portfolio.value[i].buyPricePerShare}</td>
+          <td>${stocks.portfolio.value[i].quantity}</td>
           <td><button class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
       `;
       stockTableBody.appendChild(row);
-  });
+  }
 }
 
 
