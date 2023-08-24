@@ -1,3 +1,5 @@
+import { Modal } from 'flowbite';
+
 // Example data fetched from your Spring Boot REST API
 const stockIndexesIndia = [
     { direction: "profit", name: "NIFTY 50", totalPoints: 17990, percentageChange: 4.4, pointsLost: 34 },
@@ -133,87 +135,104 @@ worldTab.addEventListener('click', () => {
 // Initially, display India-specific cards by default
 displayIndiaStockIndexes();
 
-        // Sample data with 300 data points
-        const data = [];
-        for (let i = 0; i < 100; i++) {
-            data.push(Math.floor(Math.random() * 1000));
-        }
-    
-        // ApexCharts options and config
-        window.addEventListener("load", function () {
-            let options = {
-                chart: {
-                    height: "400", // Adjust the height here
-                    width: "800", // Adjust the width here
-                    type: "area",
-                    fontFamily: "Inter, sans-serif",
-                    dropShadow: {
-                        enabled: false,
-                    },
-                    toolbar: {
-                        show: false,
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                    x: {
-                        show: true,
-                    },
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        opacityFrom: 0.55,
-                        opacityTo: 0,
-                        shade: "#5fba77",
-                        gradientToColors: ["#5fba77"],
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                stroke: {
-                    width: 2, // Adjust the line thickness here
-                },
-                grid: {
-                    show: false,
-                    strokeDashArray: 4,
-                    padding: {
-                        left: 2,
-                        right: 2,
-                        top: 0,
-                    },
-                },
-                series: [
-                    {
-                        name: "Stock Data",
-                        data: data,
-                        color: "#5fba77",
-                    },
-                ],
-                xaxis: {
-                    categories: data.map((_, index) => index),
-                    labels: {
-                        show: true,
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                },
-                yaxis: {
-                    show: true,
-                },
-            };
-    
-            if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-                const chart = new ApexCharts(document.getElementById("area-chart"), options);
-                chart.render();
-            }
-        });
+//
+// Different component!
 
+let areaChartInstance = null;
+
+function renderAreaChart(data) {
+    let options = {
+        chart: {
+            height: "400", // Adjust the height here
+            width: "800", // Adjust the width here
+            type: "area",
+            fontFamily: "Inter, sans-serif",
+            dropShadow: {
+                enabled: false,
+            },
+            toolbar: {
+                show: false,
+            },
+        },
+        tooltip: {
+            enabled: true,
+            x: {
+                show: true,
+            },
+        },
+        fill: {
+            type: "gradient",
+            gradient: {
+                opacityFrom: 0.55,
+                opacityTo: 0,
+                shade: "#5fba77",
+                gradientToColors: ["#5fba77"],
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        stroke: {
+            width: 2, // Adjust the line thickness here
+        },
+        grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+                left: 2,
+                right: 2,
+                top: 0,
+            },
+        },
+        series: [
+            {
+                name: "Stock Data",
+                data: data,
+                color: "#5fba77",
+            },
+        ],
+        xaxis: {
+            categories: data.map((_, index) => index),
+            labels: {
+                show: false,
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+        },
+        yaxis: {
+            show: true,
+        },
+    };
+
+    // Check if the chart instance exists
+    if (!areaChartInstance) {
+        // If it doesn't exist, create a new chart instance
+        if (document.getElementById("modal-area-chart") && typeof ApexCharts !== 'undefined') {
+            areaChartInstance = new ApexCharts(document.getElementById("modal-area-chart"), options);
+            areaChartInstance.render();
+        }
+    } else {
+        // If it exists, update the chart with new data
+        areaChartInstance.updateSeries([
+            {
+                name: "Stock Data",
+                data: data,
+            },
+        ]);
+    }
+}
+
+// Sample data with 300 data points
+const mockChartData = [];
+for (let i = 0; i < 100; i++) {
+    mockChartData.push(Math.floor(Math.random() * 1000));
+}
+
+//Section        
 // Search bar things
 const searchInput = document.getElementById('default-search');
 const resultCard = document.getElementById('resultCard');
@@ -302,8 +321,26 @@ function selectOption(index) {
         searchInput.value = selectedOption.textContent;
         searchInput.classList.add('ring-blue-500', 'border-blue-500'); // Change the styling
         resultCard.classList.add('invisible');
+
+        // Create a mock data object for the selected stock (replace with actual data)
+        const mockData = {
+            stockName: selectedOption.textContent,
+            profitLoss: '$2,221',
+            profitLossPercent: '+2.1%',
+            chartData: mockChartData
+            // You can add other data fields here
+        };
+
+        // Open the modal with the selected data
+        openModalWithData(mockData);
+        console.log("SOption, After Open, Before Render");
+        // Render the chart in the modal
+        renderAreaChart(mockData.chartData); // Replace with the actual chart data
+        console.log("SOption, After Render");
+
     }
 }
+
 
 // Function to update the styling of the selected item
 function updateSelectedItem() {
@@ -315,3 +352,38 @@ function updateSelectedItem() {
         }
     });
 }
+
+// Doing some modal magic
+function fetchModalData(stockName) {
+    // Simulate fetching data from the backend service
+    return {
+        stockName: stockName,
+        profitLoss: '$2,221',
+        profitLossPercent: '+2.1%',
+        // You can add other data fields here
+    };
+}
+
+const $modalEl = document.getElementById('defaultModal');
+const modal = new Modal($modalEl);
+
+// Function to open the modal with data
+function openModalWithData(data) {
+    console.log("Clicked once");
+
+    const stockNameElement = document.getElementById('modal-stock-name');
+    const profitLossElement = document.getElementById('modal-profit-loss');
+    const profitLossPercentElement = document.getElementById('modal-profit-loss-percent');
+
+    // Populate modal elements with data
+    stockNameElement.textContent = data.stockName;
+    profitLossElement.textContent = data.profitLoss;
+    profitLossPercentElement.textContent = data.profitLossPercent;
+
+    modal.toggle();
+}
+
+// document.getElementById("defaultModalButton").addEventListener('click', (e) => {
+//     console.log('hi')
+//     document.getElementById("modal-area-chart").innerHTML = "";
+// })
