@@ -92,16 +92,16 @@
             <div class="ml-0 mt-10 mr-0.5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <!-- Portfolio Title -->
                 <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portfolio Overview</h6>    
-                <!-- Total Value and Percentage Change -->
+                <!-- Total Value and Percentage Change
                 <div class="flex flex-row n mt-1">
                     <p id="portfolio-total-value" class="text-lg font-semibold pr-3"></p>
                     <p id="portfolio-total-value-percent" class="text-lg font-semibold rounded-md ml-5 pr-1 pl-1 "></p>
-                </div>
+                </div> -->
                 <!-- Horizontal Line -->
                 <hr class="h-px w-full mt-3 bg-gray-200 border-0 dark:bg-gray-700">
             
                 <!-- Table with fixed height -->
-                <div class="table-height overflow-y-auto">
+                <div class="portfolio-table-height overflow-y-auto">
                     <table id="portfolio-table" class="w-full text-base text-gray-800 dark:text-gray-100">
                         <thead class="sticky top-0 bg-white dark:bg-gray-800">
                             <tr>
@@ -168,12 +168,9 @@
                 <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Portfolio Statistics</h6> 
                 <hr class="h-px mt-3 w-full  bg-gray-200 border-0 dark:bg-gray-700 mb-1">   
                 <div class="flex flex-row n mt-1">
-                    <p class="text-4xl font-semibold">$32,221</p>
-                    <div class="flex flex-row rounded-md bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 mt-2 w-fit h-8">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class=" mt-1.5 w-5 h-5">
-                            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
-                        </svg>
-                        <p class="text-lg font-semibold "> 2.1%</p>
+                    <p id="portfolio-total-value"class="text-4xl font-semibold">$32,221</p>
+                    <div id="percentage-container">
+                        <!-- Dynamic injection here -->
                     </div>
                 </div>
                 <p id="live-portfolio-time"class="text-base text-gray-500 mt-1">Enter Time Here</p>                             
@@ -203,7 +200,7 @@
                 <div id="area-chart"></div>
             </div>   
 
-            <div id="cardContainer" class=" ml-0 flex flex-wrap -mx-4 h-36 w-full overflow-x-auto bg-white shadow-md rounded-lg mt-2">
+            <div id="cardContainer" class=" ml-0 flex flex-wrap flex-column -mx-4 h-36 w-full overflow-x-auto bg-white shadow-md rounded-lg mt-2">
                 <!-- Cards will be generated dynamically here -->
             </div>
             
@@ -341,13 +338,25 @@
     </template>
     
     <template id="suggestion-profit-arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-4 h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-4 h-4 mt-2">
             <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
         </svg>
     </template>
     
     <template id="suggestion-loss-arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="w-4 h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="w-4 h-4 mt-2">
+            <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+        </svg>
+    </template>
+
+    <template id="portfolio-profit-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06l-6.22-6.22V21a.75.75 0 01-1.5 0V4.81l-6.22 6.22a.75.75 0 11-1.06-1.06l7.5-7.5z" clip-rule="evenodd" />
+        </svg>
+    </template>
+    
+    <template id="portfolio-loss-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="w-5 h-5">
             <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
         </svg>
     </template>
