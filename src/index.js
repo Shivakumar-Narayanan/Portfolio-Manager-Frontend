@@ -157,7 +157,7 @@ displayIndiaStockIndexes();
                 tooltip: {
                     enabled: true,
                     x: {
-                        show: false,
+                        show: true,
                     },
                 },
                 fill: {
@@ -194,7 +194,7 @@ displayIndiaStockIndexes();
                 xaxis: {
                     categories: data.map((_, index) => index),
                     labels: {
-                        show: false,
+                        show: true,
                     },
                     axisBorder: {
                         show: false,
@@ -213,3 +213,105 @@ displayIndiaStockIndexes();
                 chart.render();
             }
         });
+
+// Search bar things
+const searchInput = document.getElementById('default-search');
+const resultCard = document.getElementById('resultCard');
+const dataList = document.getElementById('stock-options'); // Datalist element
+
+// Static data for demonstration (replace with your own data)
+const staticData = [
+    { name: 'Apple Inc.' },
+    { name: 'Microsoft Corporation' },
+    { name: 'Amazon.com Inc.' },
+    { name: 'Google LLC' },
+    { name: 'Facebook, Inc.' },
+    { name: 'Tesla, Inc.' },
+];
+
+let selectedOptionIndex = -1; // Initialize as -1 (no selection)
+
+// Collection of list items
+const listItems = [];
+
+// Function to update the card with static data
+function updateCard(query) {
+    const filteredData = staticData.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+    if (filteredData.length > 0) {
+        resultCard.innerHTML = '';
+        listItems.length = 0; // Clear the list of items
+
+        filteredData.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.textContent = item.name;
+            itemElement.classList.add('cursor-pointer', 'hover:text-blue-500', 'px-2', 'py-1');
+
+            itemElement.addEventListener('click', () => {
+                selectOption(index);
+            });
+
+            listItems.push(itemElement); // Add the item to the collection
+            resultCard.appendChild(itemElement);
+        });
+
+        // Update selected option index when the list is filtered
+        if (selectedOptionIndex >= 0) {
+            selectedOptionIndex = filteredData.findIndex(item => item.name === staticData[selectedOptionIndex].name);
+        }
+
+        resultCard.classList.remove('invisible');
+    } else {
+        resultCard.innerHTML = 'No results found.';
+        resultCard.classList.add('invisible');
+    }
+}
+
+// Event listener for input changes
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value;
+    if (query.length > 0) {
+        updateCard(query);
+    } else {
+        resultCard.innerHTML = ''; // Clear the card when the input is empty
+        resultCard.classList.add('invisible');
+    }
+});
+
+// Event listener for keydown events on the document
+document.addEventListener('keydown', (event) => {
+    if (listItems.length === 0) return; // No items to navigate
+
+    if (event.key === 'ArrowDown') {
+        event.preventDefault(); // Prevent scrolling
+        selectedOptionIndex = Math.min(selectedOptionIndex + 1, listItems.length - 1);
+        updateSelectedItem();
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault(); // Prevent scrolling
+        selectedOptionIndex = Math.max(selectedOptionIndex - 1, -1);
+        updateSelectedItem();
+    } else if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent form submission
+        selectOption(selectedOptionIndex);
+    }
+});
+
+// Function to select an option and populate the search bar
+function selectOption(index) {
+    const selectedOption = listItems[index];
+    if (selectedOption) {
+        searchInput.value = selectedOption.textContent;
+        searchInput.classList.add('ring-blue-500', 'border-blue-500'); // Change the styling
+        resultCard.classList.add('invisible');
+    }
+}
+
+// Function to update the styling of the selected item
+function updateSelectedItem() {
+    listItems.forEach((item, itemIndex) => {
+        if (itemIndex === selectedOptionIndex) {
+            item.classList.add('bg-blue-100'); // Add your desired styling for the selected item
+        } else {
+            item.classList.remove('bg-blue-100');
+        }
+    });
+}
