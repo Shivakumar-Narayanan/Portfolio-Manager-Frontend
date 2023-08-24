@@ -90,19 +90,19 @@
     <div class="fixed top-20 -z-10 flex">
         <!-- Left Column (4/14 width) - Portfolio Display Component -->
         <div class="w-4/14 flex flex-col">
-            <div class="ml-10 mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="ml-0 mt-10 mr-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <!-- Portfolio Title -->
                 <h6 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Diwik's Portfolio</h6>    
                 <!-- Total Value and Percentage Change -->
-                    <div class="flex flex-row n mt-1">
-                        <p id="portfolio-total-value" class="text-lg font-semibold text-green-500 dark:text-green-400 pr-3">$100,000</p>
-                        <p id="portfolio-total-value-percent" class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> +15.1%</p>
-                    </div>
-                    <!-- Horizontal Line -->
-                    <hr class="h-px w-full mt-3 bg-gray-200 border-0 dark:bg-gray-700">
-    
+                <div class="flex flex-row n mt-1">
+                    <p id="portfolio-total-value" class="text-lg font-semibold pr-3"></p>
+                    <p id="portfolio-total-value-percent" class="text-lg font-semibold rounded-md ml-5 pr-1 pl-1 "></p>
+                </div>
+                <!-- Horizontal Line -->
+                <hr class="h-px w-full mt-3 bg-gray-200 border-0 dark:bg-gray-700">
+            
                 <!-- Table -->
-                <table class="mt-4 w-full text-base text-gray-800 dark:text-gray-100">
+                <table id="portfolio-table" class="mt-4 w-full text-base text-gray-800 dark:text-gray-100">
                     <thead>
                         <tr>
                             <th class="px-2 py-2 text-center text-gray-500">SYMBL</th>
@@ -119,30 +119,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="px-2 py-1 text-center"><div class=" bg-blue-800 text-white dark:text-blue-200 font-semibold rounded-md mt-1 p-0.5">AAPL</div></td>
-                            <td class="px-10 py-1">Apple Inc.</td>
-                            <td class="px-4 py-1 text-right">$150.00</td>
-                            <td class="px-4 py-1 text-right">$143.10</td>
-                            <td class="px-4 py-1">100</td>
-                            <td class="px-4 py-1 text-right">$15000.00</td>
-                            <td class="px-4 py-1 text-center text-green-500">+$5,000</td>
-                            <td class="px-3 py-1 text-center"><div class=" bg-green-200 text-green-500 dark:text-green-400 font-semibold rounded-md mt-1 p-0.5">20.1%</div></td>
-                        </tr>
-                        <tr>
-                            <td class="px-2 py-1 text-center"><div class="bg-purple-800 text-white dark:text-purple-200 font-semibold rounded-md mt-1 p-0.5">GOOGL</div></td>
-                            <td class="px-10 py-1">Alphabet Inc.</td>
-                            <td class="px-4 py-1 text-right">$2,800.00</td>
-                            <td class="px-4 py-1 text-right">$3,142.24</td>
-                            <td class="px-4 py-1">50</td>
-                            <td class="px-4 py-1 text-right">$14000.00</td>
-                            <td class="px-4 py-1 text-center text-red-500">-$2,000</td>
-                            <td class="px-3 py-1 text-center"><div class=" bg-red-200 text-red-500 dark:text-red-400 font-semibold rounded-md mt-1 p-0.5">-17.3%</div></td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                        <!-- Table rows will be generated dynamically here -->
                     </tbody>
                 </table>
             </div>
+            
         </div>
     
         <!-- Middle Placeholder Column (6/14 width) -->
@@ -155,21 +136,7 @@
                     <p class="text-lg font-semibold text-green-500 dark:text-green-400 pr-3">$2,221</p>
                     <p class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> +2.1%</p>
                 </div>
-                <!-- <div id="area-chart"></div> -->
-                <div role="status" class="max-w-2xl p-4 border border-gray-200  bg-white rounded shadow animate-pulse md:p-6 dark:border-gray-700 ml-10 mt-10">
-                    <div class="flex items-center justify-center h-10 mb-4 bg-gray-300 rounded dark:bg-gray-700">
-                    </div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                    <div class="flex items-center mt-4 space-x-3">
-                        <div>
-                            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
-                            <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                        </div>
-                    </div>
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <div id="area-chart"></div>
             </div>   
         </div>
     
@@ -266,7 +233,7 @@
 
 <!-- Modal toggle -->
 <div class="flex justify-center ml-5">
-    <button id="defaultModalButton" data-modal-toggle="defaultModal" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+    <button id="defaultModalButton" data-modal-toggle="defaultModal" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 invisible font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
     Create
     </button>
 </div>
