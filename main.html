@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Stock Portfolio Management</title>
+  <!-- Add Bootstrap CSS link here -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style\font-awesome-4.7.0\css\font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <!-- Add your custom CSS link here -->
+  <link rel="stylesheet" href="style/styles.css">
+
+
+</head>
+
+<body onload="populateTransactionTable()">
+
+  <div class="ticker-container">
+    <div class="ticker-content">
+      <span>NIFTY 50 19,396 <i class="fa fa-caret-up" aria-hidden="true" style="color: green">0.01%</i></span>
+      <span>NIFTY 50 19,396 <i class="fa fa-caret-up" aria-hidden="true" style="color: red">0.01%</i></span>
+      <span>NIFTY 50 19,396 <i class="fa fa-caret-up" aria-hidden="true" style="color: green">0.01%</i></span>
+      <span>NIFTY 50 19,396 <i class="fa fa-caret-up" aria-hidden="true" style="color: red">0.01%</i></span>
+    </div>
+  </div>
+
+  <!-- search bar for stock -->
+
+  <!-- <div class="flexible-iframe">
+    <iframe src="stocksearch.html" ></iframe>
+  </div> -->
+
+  <div class="container mt-5">
+    <div class="form-group" id="searchContainer">
+      <h3 id="searchText">Search</h3>
+      <input type="text" id="searchInput" class="form-control" placeholder="Search Stock Symbol">
+    </div>
+    <table class="table table-striped" id="stockTable" style="display: none;">
+        <thead>
+          <tr>
+            <th>Stock Symbol</th>
+            <th>Price</th>
+            <th>Stock Count</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="stockTableBodyForSearch">
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <p id="noStockMessage" style="display: none;">No stock present.</p>
+</div>
+
+  <div class="container-fluid p-5 mt-2">
+    <div class="row">
+      <div class="col">
+        <h3>Market Summay</h3>
+        <table class="table expandable-table">
+          <tbody>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+            <tr class="expandable-row">
+              <th scope="row">1</th>
+              <td>Relience</td>
+              <td><i class="fa fa-inr" aria-hidden="true">8.75</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true" style="color: green;">0.45</i></td>
+              <td><i class="fa fa-inr" aria-hidden="true"
+                  style="color: green; background-color: rgb(202, 241, 217); border-radius: 25px">4.89%</i></td>
+            </tr>
+            <tr class="expanded-content">
+              <td colspan="5">
+                Additional details about John.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        
+        <h3>Porfolio Performance</h3>
+        <!-- portfolio chart -->
+
+        <div class="container mt-5 col" >
+          <div class="row">
+            <div class="col-md-12 mx-auto">
+              <div class="card light-mode shadow">
+                <div class="card-header light-mode">
+                  Stock Portfolio Worth Over Time
+                </div>
+                <div class="card-body">
+                  <div class="chart-container light-mode">
+                    <canvas id="portfolioChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        
+
+
+        <!-- portfolio chart end -->
+      </div>
+      <div class="col">
+        <h3> User Stock Portfolio</h3>
+        <div class="container mt-5">
+          <button id="toggleStocksButton" class="btn btn-primary mb-3">Show Stocks</button>
+          <table class="table table-striped">
+              <thead id="tableHeader" style="display: none;">
+                  <tr>
+                    
+                      <th>Symbol</th>
+                      <th>Name</th>
+                      <th>Total</th>
+                      <th>Price/share</th>
+                      <th>Quantity</th>
+                      <th>Action</th>
+                  
+                  </tr>
+              </thead>
+              <tbody id="stockTableBody">
+                  <!-- Stock data will be inserted here -->
+              </tbody>
+          </table>
+
+      </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <!-- Transaction Table -->
+  <div class="container">
+    <div class="row">
+      <table class="table table-hover table-striped">
+        <thead id="transactionTableHeader">
+            <tr>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Stock Symbol</th>
+                <th scope="col">Count</th>
+                <th scope="col">Price</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTableBody">
+            <!-- Transactions data will be inserted here -->
+        </tbody>
+    </table>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Add Bootstrap JS and any additional JS scripts here -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script><!-- Add your custom JS scripts here -->
+
+  <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="js\scripts.js"></script>
+  <script src="js/transaction.js"></script>
+</body>
+
+</html>
