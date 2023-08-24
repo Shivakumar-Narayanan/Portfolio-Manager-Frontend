@@ -1401,10 +1401,6 @@ input:checked + .toggle-bg {
   height: 1rem;
 }
 
-.h-48 {
-  height: 12rem;
-}
-
 .h-6 {
   height: 1.5rem;
 }
@@ -1431,10 +1427,6 @@ input:checked + .toggle-bg {
 
 .w-1\/4 {
   width: 25%;
-}
-
-.w-10 {
-  width: 2.5rem;
 }
 
 .w-2 {
@@ -1821,6 +1813,11 @@ input:checked + .toggle-bg {
   padding: 1.5rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1844,6 +1841,11 @@ input:checked + .toggle-bg {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .py-1 {
@@ -1952,11 +1954,6 @@ input:checked + .toggle-bg {
   color: rgb(28 100 242 / var(--tw-text-opacity));
 }
 
-.text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2058,6 +2055,26 @@ input:checked + .toggle-bg {
 .card-width {
   width: 12rem;
   /* Set your desired fixed width here */
+}
+
+#delete {
+  display: inline-block;
+  padding: 5px 5px;
+  background-color: #fd6a6a;
+  color: rgb(248, 250, 233);
+  border: none;
+  border-radius: 5px;
+  /* Adjust this value for the desired corner roundness */
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Additional styles for hover effect */
+
+#delete:hover {
+  background-color: #f80606;
 }
 
 .hover\:border-gray-300:hover {
@@ -2224,16 +2241,6 @@ input:checked + .toggle-bg {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:text-gray-600) {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-:is(.dark .dark\:text-gray-700) {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
 :is(.dark .dark\:text-green-400) {
   --tw-text-opacity: 1;
   color: rgb(49 196 141 / var(--tw-text-opacity));
@@ -2320,3 +2327,6 @@ input:checked + .toggle-bg {
     padding: 1.5rem;
   }
 }
+
+  
+  
