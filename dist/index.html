@@ -7,6 +7,7 @@
     <!-- Link your custom CSS file -->
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="#">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body class="bg-gray-100">
@@ -187,7 +188,7 @@
                     <p class="text-lg font-semibold rounded-md  bg-green-200 text-green-500 dark:text-green-400 ml-5 pr-1 pl-1 "> stuff</p>
                 </div>
                 <div id="area-chart"></div>
-                <div role="status" class="max-w-2xl p-4 border border-gray-200  bg-white rounded shadow animate-pulse md:p-6 dark:border-gray-700 ml-10 mt-10">
+                <!-- <div role="status" class="max-w-2xl p-4 border border-gray-200  bg-white rounded shadow animate-pulse md:p-6 dark:border-gray-700 ml-10 mt-10">
                     <div class="flex items-center justify-center h-10 mb-4 bg-gray-300 rounded dark:bg-gray-700">
                     </div>
                     <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
@@ -200,6 +201,20 @@
                         </div>
                     </div>
                     <span class="sr-only">Loading...</span>
+                </div> -->
+                <div style="display: flex;">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style="margin-right: 10px;">
+                        1 week
+                    </button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style="margin-right: 10px;">
+                        1 Month
+                    </button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" style="margin-right: 10px;">
+                        6 Month
+                    </button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        1 Year
+                    </button>
                 </div>
             </div>   
         </div>
