@@ -1,3 +1,16 @@
+import { addSearchBarEventListener } from "./shiva_js/searchBarEventListener.js";
+import { setupDataRefresh, setupRefresh10Seconds } from "./shiva_js/setupDataRefresh.js";
+
+// startup
+const addEventListeners = () => {
+    addSearchBarEventListener();
+}
+
+addEventListeners();
+
+setupDataRefresh();
+setupRefresh10Seconds();
+
 // Example data fetched from your Spring Boot REST API
 const stockIndexesIndia = [
     { direction: "profit", name: "NIFTY 50", totalPoints: 17990, percentageChange: 4.4, pointsLost: 34 },
@@ -133,83 +146,3 @@ worldTab.addEventListener('click', () => {
 // Initially, display India-specific cards by default
 displayIndiaStockIndexes();
 
-        // Sample data with 300 data points
-        const data = [];
-        for (let i = 0; i < 100; i++) {
-            data.push(Math.floor(Math.random() * 1000));
-        }
-    
-        // ApexCharts options and config
-        window.addEventListener("load", function () {
-            let options = {
-                chart: {
-                    height: "400", // Adjust the height here
-                    width: "800", // Adjust the width here
-                    type: "area",
-                    fontFamily: "Inter, sans-serif",
-                    dropShadow: {
-                        enabled: false,
-                    },
-                    toolbar: {
-                        show: false,
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                    x: {
-                        show: false,
-                    },
-                },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                        opacityFrom: 0.55,
-                        opacityTo: 0,
-                        shade: "#5fba77",
-                        gradientToColors: ["#5fba77"],
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                stroke: {
-                    width: 2, // Adjust the line thickness here
-                },
-                grid: {
-                    show: false,
-                    strokeDashArray: 4,
-                    padding: {
-                        left: 2,
-                        right: 2,
-                        top: 0,
-                    },
-                },
-                series: [
-                    {
-                        name: "Stock Data",
-                        data: data,
-                        color: "#5fba77",
-                    },
-                ],
-                xaxis: {
-                    categories: data.map((_, index) => index),
-                    labels: {
-                        show: false,
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false,
-                    },
-                },
-                yaxis: {
-                    show: true,
-                },
-            };
-    
-            if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-                const chart = new ApexCharts(document.getElementById("area-chart"), options);
-                chart.render();
-            }
-        });
