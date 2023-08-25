@@ -5,3 +5,13 @@
 .card-width {
     width: 12rem; /* Set your desired fixed width here */
 }
+
+.portfolio-table{
+    max-height: 400px; /* Set the maximum height you prefer */
+    overflow-y: auto;
+}
+
+.table-height{
+    max-height: 400px; /* Set the maximum height you prefer */
+    overflow-y: auto;
+}
