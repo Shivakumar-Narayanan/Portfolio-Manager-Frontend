@@ -1,3 +1,5 @@
+import { convertTo2DecimalPlaces } from "../util/decimalUtil";
+
 // Sample transaction data (replace this with your actual data)
 const mockTransactionData = {
     tableData: [
@@ -15,13 +17,50 @@ const mockTransactionData = {
 };
 
 export const  generateTransactionTableRows = (transactionData = mockTransactionData) => {
-    const tableBody = document.querySelector('#transaction-table tbody');
+
+    transactionData = {}
+    const tableData = []
+
+    const transactionListUrl = "http://localhost:8083/transaction/getAllTransactions";
+
+    fetch(transactionListUrl).then(response => response.json()).then(response => {
+
+        response.forEach(transaction => {
+
+            const ticker = transaction["stock"]["ticker"]
+            const name = transaction["stock"]["name"]
+            const transactionPrice = transaction["stockPrice"]
+            const quantity = transaction["stockCount"]
+            const totalAmount = transactionPrice * quantity
+            const transactionType = transaction["transactionType"]
+            const transactionDate = transaction["transactionDate"]
+            const DELETE = "DELETE"
+
+            const row = [
+                ticker,
+                name,
+                convertTo2DecimalPlaces(transactionPrice),
+                quantity,
+                convertTo2DecimalPlaces(totalAmount),
+                transactionType,
+                transactionDate,
+                DELETE
+            ]
+
+            tableData.push(row)
+        }) 
+
+        transactionData[tableData] = tableData
+
+        // console.log(transactionData)
+
+        const tableBody = document.querySelector('#transaction-table tbody');
 
     // Clear existing table rows
     tableBody.innerHTML = '';
 
     // Loop through the table data and generate rows
-    transactionData.tableData.forEach(rowData => {
+    transactionData[tableData].forEach(rowData => {
         
         const row = document.createElement('tr');
 
@@ -79,6 +118,8 @@ export const  generateTransactionTableRows = (transactionData = mockTransactionD
 
         tableBody.appendChild(row);
     });
+
+    }) 
 }
 
 

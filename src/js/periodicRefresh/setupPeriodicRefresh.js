@@ -1,3 +1,4 @@
+import { displayGainerStocks, displayLoserStocks } from "../gainersLosers/gainersLosers.js";
 import { updateLiveTime } from "../liveTime/liveTime.js";
 import { updatePortfolioList } from "../portfolioList/portfolioList.js";
 import { generateTransactionTableRows } from "../transactionData/transactionData.js";
@@ -5,7 +6,7 @@ import { updateChart } from "../util/ChartUtil.js";
 
 export const setupDataRefresh = () => {
     refreshData();
-    var intervalId = setInterval(refreshData, 5000);
+    var intervalId = setInterval(refreshData, 10000);
 }
 
 export const setupRefresh10Seconds = () => {
@@ -31,6 +32,8 @@ const RefreshData10Seconds = () => {
     refreshGraph();
     generateTransactionTableRows();
     updateLiveTime();
+    displayGainerStocks();
+    displayLoserStocks();
 }
 
 const updateTotalPortfolioValue = () => {

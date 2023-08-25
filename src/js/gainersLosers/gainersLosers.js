@@ -1,6 +1,9 @@
 //Doing the above card switch tab section for top gainers and losers!
+
+import { convertTo2DecimalPlaces } from "../util/decimalUtil";
+
 // Example data fetched from your Spring Boot REST API
-const topGainersList = [
+const topGainersListMock = [
     { direction: "profit", name: "AAPL", totalPoints: 1000, percentageChange: 5.2, pointsChange: 50 },
     { direction: "profit", name: "AMZN", totalPoints: 800, percentageChange: 4.6, pointsChange: 40 },
     { direction: "profit", name: "MSFT", totalPoints: 1200, percentageChange: 6.1, pointsChange: 60 },
@@ -8,7 +11,7 @@ const topGainersList = [
     { direction: "profit", name: "FB", totalPoints: 1100, percentageChange: 5.5, pointsChange: 55 }
 ];
 
-const topLosersList = [
+const topLosersListMock = [
     { direction: "loss", name: "TSLA", totalPoints: 750, percentageChange: -4.4, pointsChange: 30 },
     { direction: "loss", name: "NFLX", totalPoints: 600, percentageChange: -5.9, pointsChange: 40 },
     { direction: "loss", name: "TWTR", totalPoints: 480, percentageChange: -3.1, pointsChange: 20 },
@@ -86,41 +89,102 @@ function createGainerLoserCard(indexData) {
 
 
 // Function to display India-specific cards
-export const displayGainerStocks = () => {
-    const cardContainer = document.getElementById('gainersLosersContainer');
-    cardContainer.innerHTML = ''; // Clear existing cards
+export const displayGainerStocks = (topGainersList = topGainersListMock) => {
 
-    // Loop through India-specific stock index data and create cards
-    topGainersList.forEach((indexData) => {
-        createGainerLoserCard(indexData);
-    });
+    topGainersList = []
 
-    // Toggle tab styles
-    const gainersTab = document.getElementById('gainersTab');
-    const losersTab = document.getElementById('losersTab');
-    gainersTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    gainersTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
-    losersTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    losersTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+    const topGainersUrl = "http://localhost:8083/portfolio/topGainers";
+
+    fetch(topGainersUrl).then(response => response.json()).then(response => {
+
+        // { direction: "profit", name: "AAPL", totalPoints: 1000, percentageChange: 5.2, pointsChange: 50 }
+        response.forEach(topGainer => {
+
+            const ticker = topGainer["stock"]["ticker"]
+            const totalPoints = topGainer["currentPricePerShare"]
+            const buyPricePerShare = topGainer["buyPricePerShare"]
+            const profit = totalPoints - buyPricePerShare;
+            const profitLossPercentage = (profit * 100) / buyPricePerShare;
+            const direction = profit >= 0 ? "profit" : "loss";
+            const row = {
+                direction: direction,
+                name: ticker,
+                totalPoints: convertTo2DecimalPlaces(totalPoints),
+                percentageChange: convertTo2DecimalPlaces(profitLossPercentage),
+                pointsChange: convertTo2DecimalPlaces(profit)
+            }
+
+            topGainersList.push(row)
+        })
+
+
+        const cardContainer = document.getElementById('gainersLosersContainer');
+        cardContainer.innerHTML = ''; // Clear existing cards
+
+        // Loop through India-specific stock index data and create cards
+        topGainersList.forEach((indexData) => {
+            createGainerLoserCard(indexData);
+        });
+
+        // Toggle tab styles
+        const gainersTab = document.getElementById('gainersTab');
+        const losersTab = document.getElementById('losersTab');
+        gainersTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+        gainersTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+        losersTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+        losersTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+
+    })
 }
 
 // Function to display Rest of World-specific cards
-function displayLoserStocks() {
-    const cardContainer = document.getElementById('gainersLosersContainer');
-    cardContainer.innerHTML = ''; // Clear existing cards
+export const displayLoserStocks = (topLosersList = topLosersListMock) => {
 
-    // Loop through Rest of World-specific stock index data and create cards
-    topLosersList.forEach((indexData) => {
-        createGainerLoserCard(indexData);
-    });
+    topLosersList = []
 
-    // Toggle tab styles
-    const gainersTab = document.getElementById('gainersTab');
-    const losersTab = document.getElementById('losersTab');
-    losersTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    losersTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
-    gainersTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
-    gainersTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+
+    const topLosersUrl = "http://localhost:8083/portfolio/topLosers";
+
+    fetch(topLosersUrl).then(response => response.json()).then(response => {
+
+        // { direction: "profit", name: "AAPL", totalPoints: 1000, percentageChange: 5.2, pointsChange: 50 }
+        response.forEach(topLoser => {
+
+            const ticker = topLoser["stock"]["ticker"]
+            const totalPoints = topLoser["currentPricePerShare"]
+            const buyPricePerShare = topLoser["buyPricePerShare"]
+            const profit = totalPoints - buyPricePerShare;
+            const profitLossPercentage = (profit * 100) / buyPricePerShare;
+            const direction = profit >= 0 ? "profit" : "loss";
+            const row = {
+                direction: direction,
+                name: ticker,
+                totalPoints: convertTo2DecimalPlaces(totalPoints),
+                percentageChange: convertTo2DecimalPlaces(profitLossPercentage),
+                pointsChange: convertTo2DecimalPlaces(profit)
+            }
+
+            topLosersList.push(row)
+        })
+
+        const cardContainer = document.getElementById('gainersLosersContainer');
+        cardContainer.innerHTML = ''; // Clear existing cards
+
+        // Loop through Rest of World-specific stock index data and create cards
+        topLosersList.forEach((indexData) => {
+            createGainerLoserCard(indexData);
+        });
+
+        // Toggle tab styles
+        const gainersTab = document.getElementById('gainersTab');
+        const losersTab = document.getElementById('losersTab');
+        losersTab.classList.add('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+        losersTab.classList.remove('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+        gainersTab.classList.remove('text-blue-600', 'bg-gray-100', 'active', 'dark:bg-gray-800', 'dark:text-blue-500');
+        gainersTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
+
+    })
+
 }
 
 // Event listeners for tab buttons

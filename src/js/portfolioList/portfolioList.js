@@ -90,7 +90,7 @@ export const updatePortfolioList = () => {
                     tableData: portfolio2DArray
                 }
 
-                console.log(portfolioData)
+                // console.log(portfolioData)
 
                 populatePortfolioData(portfolioData);
                 generateTableRows(portfolioData);
@@ -185,6 +185,9 @@ function populatePortfolioData(portfolioData = portfolioDataMock) {
 
 // Function to generate and populate the table rows
 function generateTableRows(portfolioData = portfolioDataMock) {
+
+    // console.log(portfolioData)
+
     const tableBody = document.querySelector('#portfolio-table tbody');
 
     // Clear existing table rows
