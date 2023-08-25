@@ -99,7 +99,7 @@ export const updatePortfolioList = () => {
 // ----------------------------------------------------------
 
 // Function to populate the portfolio total value and percentage
-export function populatePortfolioData(portfolioData = portfolioDataMock) {
+//export function populatePortfolioData(portfolioData = portfolioDataMock) {
     // const totalValueElement = document.getElementById('portfolio-total-value');
     // const totalValuePercentElement = document.getElementById('portfolio-total-value-percent');
 
@@ -116,6 +116,61 @@ export function populatePortfolioData(portfolioData = portfolioDataMock) {
     //     totalValueElement.classList.add('text-lg', 'font-semibold', 'text-green-500', 'dark:text-green-400', 'pr-3')
     //     totalValuePercentElement.classList.add('text-lg', 'font-semibold', 'rounded-md', 'ml-5', 'pr-1', 'pl-1', 'text-red-500', 'bg-red-200', 'dark:text-red-400');
     // }
+//}
+
+function populatePortfolioData(portfolioData=portfolioDataMock) {
+    const totalValueElement = document.getElementById('portfolio-total-value');
+    const container = document.getElementById('percentage-container'); 
+    container.innerHTML = '';
+    // Create the parent div element
+    const divElement = document.createElement('div');
+
+    // Set the total value percentage text content
+    if (portfolioData.totalValuePercent >= 0) {
+        totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
+        totalValueElement.classList.add('text-4xl','font-semibold')
+
+        divElement.classList.add('flex', 'flex-row', 'rounded-md', 'ml-5', 'mt-2', 'w-fit', 'h-8', 'bg-green-200', 'text-green-500', 'dark:text-green-400', 'pr-1', 'pl-1');
+
+        const svgTemplateId =  'suggestion-profit-arrow';
+        const svgTemplate = document.getElementById(svgTemplateId);
+        const svgClone = document.importNode(svgTemplate.content, true);
+        
+        const percentageElement = document.createElement('p');
+        percentageElement.textContent = `${portfolioData.totalValuePercent .toFixed(2)}%`;
+        percentageElement.classList.add('text-lg', 'font-semibold');
+
+        // Append SVG and percentage elements to the parent div
+        divElement.appendChild(svgClone);
+
+        // container.removeChild(container.firstChild);
+        divElement.appendChild(percentageElement);
+
+        // Append the parent div to the container
+        container.appendChild(divElement);
+    } else {
+        totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
+        totalValueElement.classList.add('text-4xl','font-semibold')
+
+        divElement.classList.add('flex', 'flex-row', 'rounded-md', 'ml-5', 'mt-2', 'w-fit', 'h-8', 'bg-red-200', 'text-red-500', 'dark:text-red-400', 'pr-1', 'pl-1');
+
+        const svgTemplateId =  'suggestion-loss-arrow';
+        const svgTemplate = document.getElementById(svgTemplateId);
+        const svgClone = document.importNode(svgTemplate.content, true);
+        
+        const percentageElement = document.createElement('p');
+        percentageElement.textContent = `${portfolioData.totalValuePercent .toFixed(2)}%`;
+        percentageElement.classList.add('text-lg', 'font-semibold');
+
+        // Append SVG and percentage elements to the parent div
+        divElement.appendChild(svgClone);
+
+        // container.removeChild(container.firstChild);
+        divElement.appendChild(percentageElement);
+
+        // Append the parent div to the container
+        container.appendChild(divElement);
+    }
 }
 
 // Function to generate and populate the table rows
