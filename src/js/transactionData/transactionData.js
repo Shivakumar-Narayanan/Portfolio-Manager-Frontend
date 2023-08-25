@@ -18,6 +18,8 @@ const mockTransactionData = {
 
 export const  generateTransactionTableRows = (transactionData = mockTransactionData) => {
 
+    console.log('generating transaction table rows')
+
     transactionData = {}
     const tableData = []
 
