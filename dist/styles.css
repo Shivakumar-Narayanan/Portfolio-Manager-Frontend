@@ -1383,6 +1383,14 @@ input:checked + .toggle-bg {
   margin-left: auto;
 }
 
+.mr-0 {
+  margin-right: 0px;
+}
+
+.mr-0\.5 {
+  margin-right: 0.125rem;
+}
+
 .mr-10 {
   margin-right: 2.5rem;
 }
@@ -1421,14 +1429,6 @@ input:checked + .toggle-bg {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mr-0 {
-  margin-right: 0px;
-}
-
-.mr-0\.5 {
-  margin-right: 0.125rem;
 }
 
 .block {

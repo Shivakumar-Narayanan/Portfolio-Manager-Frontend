@@ -1,4 +1,5 @@
 import { updatePortfolioList } from "../portfolioList/portfolioList.js";
+import { generateTransactionTableRows } from "../transactionData/transactionData.js";
 import { updateChart } from "../util/ChartUtil.js";
 
 export const setupDataRefresh = () => {
@@ -17,6 +18,7 @@ const refreshData = () => {
 
 const RefreshData10Seconds = () => {
     refreshGraph();
+    generateTransactionTableRows();
 }
 
 const updatePortfolio = () => {
