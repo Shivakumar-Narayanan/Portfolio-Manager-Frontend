@@ -1,3 +1,4 @@
+import { updateLiveTime } from "../liveTime/liveTime.js";
 import { updatePortfolioList } from "../portfolioList/portfolioList.js";
 import { generateTransactionTableRows } from "../transactionData/transactionData.js";
 import { updateChart } from "../util/ChartUtil.js";
@@ -12,15 +13,6 @@ export const setupRefresh10Seconds = () => {
     var intervalId = setInterval(RefreshData10Seconds, 10000);
 }
 
-const refreshData = () => {
-    updatePortfolio();
-}
-
-const RefreshData10Seconds = () => {
-    refreshGraph();
-    generateTransactionTableRows();
-}
-
 const updatePortfolio = () => {
     // updateTotalPortfolioValue();
 
@@ -29,6 +21,16 @@ const updatePortfolio = () => {
     // updatePortfolioList();
 
     updatePortfolioList();
+}
+
+const refreshData = () => {
+    updatePortfolio();
+}
+
+const RefreshData10Seconds = () => {
+    refreshGraph();
+    generateTransactionTableRows();
+    updateLiveTime();
 }
 
 const updateTotalPortfolioValue = () => {

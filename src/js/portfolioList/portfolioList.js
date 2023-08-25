@@ -1,3 +1,5 @@
+import { getRandomDarkColor } from "../util/generateRandomDarkColor";
+
 const portfolioDataMock = {
     totalValue: 100000, // Replace with your portfolio's total value
     totalValuePercent: 15.1, // Replace with your portfolio's percentage change
@@ -250,11 +252,4 @@ function generateTableRows(portfolioData=portfolioDataMock) {
 
         tableBody.appendChild(row);
     });
-}
-
-// Helper function to generate random dark color classes
-function getRandomDarkColor() {
-    const colors = ['blue', 'purple', 'pink', 'indigo', 'green', 'red'];
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return `${colors[randomIndex]}-800`;
 }

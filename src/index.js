@@ -3,6 +3,8 @@ import { openModalWithData } from "./js/modal/modal.js";
 import { doNothing } from "./js/searchBar/searchBar.js";
 import { renderPortfolioChart } from "./js/portfolioGraph/portfolioGraph.js";
 import { setupDataRefresh, setupRefresh10Seconds } from "./js/periodicRefresh/setupPeriodicRefresh.js";
+import { displayGainerStocks } from "./js/gainersLosers/gainersLosers.js";
+import { generateCards } from "./js/suggestedStocks/suggestedCards.js";
 
 addSaveButtonEventListener();
 
@@ -126,6 +128,8 @@ function displayWorldStockIndexes() {
     indiaTab.classList.add('hover:text-gray-600', 'hover:bg-gray-50', 'dark:hover:bg-gray-800', 'dark:hover:text-gray-300');
 }
 
+displayGainerStocks();
+
 // Event listeners for tab buttons
 const indiaTab = document.getElementById('indiaTab');
 const worldTab = document.getElementById('worldTab');
@@ -140,6 +144,8 @@ worldTab.addEventListener('click', () => {
 
 // Initially, display India-specific cards by default
 displayIndiaStockIndexes();
+
+generateCards();
 
 //
 // Different component!
