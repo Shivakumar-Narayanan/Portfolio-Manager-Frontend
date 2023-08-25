@@ -100,7 +100,7 @@ function updateCard(query) {
 
 
 // This will be used by the popup charts
-function renderStockAreaChart(data) {
+export const renderStockAreaChart = (data) => {
     let options = {
         chart: {
             height: "400", // Adjust the height here
@@ -230,6 +230,11 @@ const initiateStockPopup = (selectedOption) => {
     console.log(name)
     console.log(ticker)
 
+    generateStockPopupGraph(name, ticker);
+
+}
+
+export const generateStockPopupGraph = (name, ticker) => {
     const stockDataUrl = "http://localhost:8083/market/stockValueOverTime?startDate=2022-01-01&endDate=2023-08-25&ticker=AAPL";
     const stockPriceUrl = "http://localhost:8083/market/stockQuote?ticker=" + ticker;
 
@@ -240,7 +245,7 @@ const initiateStockPopup = (selectedOption) => {
                 stockPrice => {
 
                     const mockChartData = {
-                        stockName: selectedOption.textContent,
+                        stockName: name + " (" + ticker + ")",
                         profitLoss: stockPrice,
                         profitLossPercent: '+2.1%',
                         chartData: stockData

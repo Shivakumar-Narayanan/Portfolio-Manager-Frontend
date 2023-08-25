@@ -1,3 +1,5 @@
+import { openModalWithData } from "../modal/modal";
+import { generateStockPopupGraph, renderStockAreaChart } from "../searchBar/searchBar";
 import { getRandomDarkColor } from "../util/generateRandomDarkColor";
 
 const portfolioDataMock = {
@@ -17,18 +19,24 @@ const portfolioDataMock = {
     ]
 };
 
-// const mockChartData = [];
-// for (let i = 0; i < 100; i++) {
-//     mockChartData.push(Math.floor(Math.random() * 1000));
-// }
+const mockChartData = [];
+for (let i = 0; i < 10; i++) {
+    const y = Math.floor(Math.random() * 1000)
+    mockChartData.push(
+        {
+            value: y,
+            key: i
+        }
+    );
+}
 
-// let mockData = {
-//     stockName: "",
-//     profitLoss: "",
-//     profitLossPercent: "",
-//     chartData: mockChartData
-//     // You can add other data fields here
-// };
+let mockData = {
+    stockName: "",
+    profitLoss: "",
+    profitLossPercent: "",
+    chartData: mockChartData
+    // You can add other data fields here
+};
 
 export const updatePortfolioList = () => {
 
@@ -73,7 +81,7 @@ export const updatePortfolioList = () => {
 
             const profitLossPercentageUrl = "http://localhost:8083/portfolio/profitLossPercentage";
             fetch(profitLossPercentageUrl).then(response => response.json()).then(profitLossPercentage => {
-                
+
                 // profitLossPercentage = convertTo2DecimalPlaces(parseDouble(profitLossPercentage))
                 // console.log(profitLossPercentage)
                 const portfolioData = {
@@ -81,7 +89,7 @@ export const updatePortfolioList = () => {
                     totalValuePercent: profitLossPercentage, // Replace with your portfolio's percentage change
                     tableData: portfolio2DArray
                 }
-                
+
                 console.log(portfolioData)
 
                 populatePortfolioData(portfolioData);
@@ -102,27 +110,27 @@ export const updatePortfolioList = () => {
 
 // Function to populate the portfolio total value and percentage
 //export function populatePortfolioData(portfolioData = portfolioDataMock) {
-    // const totalValueElement = document.getElementById('portfolio-total-value');
-    // const totalValuePercentElement = document.getElementById('portfolio-total-value-percent');
+// const totalValueElement = document.getElementById('portfolio-total-value');
+// const totalValuePercentElement = document.getElementById('portfolio-total-value-percent');
 
-    // // Set the total value text content
-    // totalValuePercentElement.textContent = `${portfolioData.totalValuePercent.toFixed(2)}%`;
-    // // Set the total value percentage text content
-    // if (portfolioData.totalValuePercent >= 0) {
-    //     totalValueElement.textContent = `$+${portfolioData.totalValue.toFixed(2)}`;
-    //     totalValueElement.classList.add('text-lg', 'font-semibold', 'text-green-500', 'dark:text-green-400', 'pr-3')
-    //     totalValuePercentElement.classList.add('text-lg', 'font-semibold', 'rounded-md', 'ml-5', 'pr-1', 'pl-1', 'text-green-500', 'bg-green-200', 'dark:text-green-400');
-    // } else {
-    //     totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
-    //     // totalValueElement.classList.add('text-lg', 'font-semibold', 'text-red-500', 'dark:text-red-400', 'pr-3')
-    //     totalValueElement.classList.add('text-lg', 'font-semibold', 'text-green-500', 'dark:text-green-400', 'pr-3')
-    //     totalValuePercentElement.classList.add('text-lg', 'font-semibold', 'rounded-md', 'ml-5', 'pr-1', 'pl-1', 'text-red-500', 'bg-red-200', 'dark:text-red-400');
-    // }
+// // Set the total value text content
+// totalValuePercentElement.textContent = `${portfolioData.totalValuePercent.toFixed(2)}%`;
+// // Set the total value percentage text content
+// if (portfolioData.totalValuePercent >= 0) {
+//     totalValueElement.textContent = `$+${portfolioData.totalValue.toFixed(2)}`;
+//     totalValueElement.classList.add('text-lg', 'font-semibold', 'text-green-500', 'dark:text-green-400', 'pr-3')
+//     totalValuePercentElement.classList.add('text-lg', 'font-semibold', 'rounded-md', 'ml-5', 'pr-1', 'pl-1', 'text-green-500', 'bg-green-200', 'dark:text-green-400');
+// } else {
+//     totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
+//     // totalValueElement.classList.add('text-lg', 'font-semibold', 'text-red-500', 'dark:text-red-400', 'pr-3')
+//     totalValueElement.classList.add('text-lg', 'font-semibold', 'text-green-500', 'dark:text-green-400', 'pr-3')
+//     totalValuePercentElement.classList.add('text-lg', 'font-semibold', 'rounded-md', 'ml-5', 'pr-1', 'pl-1', 'text-red-500', 'bg-red-200', 'dark:text-red-400');
+// }
 //}
 
-function populatePortfolioData(portfolioData=portfolioDataMock) {
+function populatePortfolioData(portfolioData = portfolioDataMock) {
     const totalValueElement = document.getElementById('portfolio-total-value');
-    const container = document.getElementById('percentage-container'); 
+    const container = document.getElementById('percentage-container');
     container.innerHTML = '';
     // Create the parent div element
     const divElement = document.createElement('div');
@@ -130,16 +138,16 @@ function populatePortfolioData(portfolioData=portfolioDataMock) {
     // Set the total value percentage text content
     if (portfolioData.totalValuePercent >= 0) {
         totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
-        totalValueElement.classList.add('text-4xl','font-semibold')
+        totalValueElement.classList.add('text-4xl', 'font-semibold')
 
         divElement.classList.add('flex', 'flex-row', 'rounded-md', 'ml-5', 'mt-2', 'w-fit', 'h-8', 'bg-green-200', 'text-green-500', 'dark:text-green-400', 'pr-1', 'pl-1');
 
-        const svgTemplateId =  'suggestion-profit-arrow';
+        const svgTemplateId = 'suggestion-profit-arrow';
         const svgTemplate = document.getElementById(svgTemplateId);
         const svgClone = document.importNode(svgTemplate.content, true);
-        
+
         const percentageElement = document.createElement('p');
-        percentageElement.textContent = `${portfolioData.totalValuePercent .toFixed(2)}%`;
+        percentageElement.textContent = `${portfolioData.totalValuePercent.toFixed(2)}%`;
         percentageElement.classList.add('text-lg', 'font-semibold');
 
         // Append SVG and percentage elements to the parent div
@@ -152,16 +160,16 @@ function populatePortfolioData(portfolioData=portfolioDataMock) {
         container.appendChild(divElement);
     } else {
         totalValueElement.textContent = `$${portfolioData.totalValue.toFixed(2)}`;
-        totalValueElement.classList.add('text-4xl','font-semibold')
+        totalValueElement.classList.add('text-4xl', 'font-semibold')
 
         divElement.classList.add('flex', 'flex-row', 'rounded-md', 'ml-5', 'mt-2', 'w-fit', 'h-8', 'bg-red-200', 'text-red-500', 'dark:text-red-400', 'pr-1', 'pl-1');
 
-        const svgTemplateId =  'suggestion-loss-arrow';
+        const svgTemplateId = 'suggestion-loss-arrow';
         const svgTemplate = document.getElementById(svgTemplateId);
         const svgClone = document.importNode(svgTemplate.content, true);
-        
+
         const percentageElement = document.createElement('p');
-        percentageElement.textContent = `${portfolioData.totalValuePercent .toFixed(2)}%`;
+        percentageElement.textContent = `${portfolioData.totalValuePercent.toFixed(2)}%`;
         percentageElement.classList.add('text-lg', 'font-semibold');
 
         // Append SVG and percentage elements to the parent div
@@ -176,7 +184,7 @@ function populatePortfolioData(portfolioData=portfolioDataMock) {
 }
 
 // Function to generate and populate the table rows
-function generateTableRows(portfolioData=portfolioDataMock) {
+function generateTableRows(portfolioData = portfolioDataMock) {
     const tableBody = document.querySelector('#portfolio-table tbody');
 
     // Clear existing table rows
@@ -237,13 +245,22 @@ function generateTableRows(portfolioData=portfolioDataMock) {
             }
 
             if (index === 0) {
+
+                // const mockData123 = {
+                //     stockName: rowData[1],
+                //     profitLoss: rowData[6],
+                //     profitLossPercent: rowData[7],
+                //     chartData: mockChartData
+                // };
+
+                // console.log(mockData123)
                 row.addEventListener('click', () => {
-                    openModalWithData({
-                        stockName: rowData[1],
-                        profitLoss: rowData[6],
-                        profitLossPercent: rowData[7]
-                    });
-                    renderStockAreaChart(mockData.chartData);
+
+                    console.log('adding event listener to row')
+                    generateStockPopupGraph(rowData[1], rowData[0]);
+
+                    // openModalWithData(mockData123);
+                    // renderStockAreaChart(mockData123.chartData);
                 });
             }
 
